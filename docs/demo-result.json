@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "requests": 12,
+  "executed_calls": 3,
+  "reserved_units": 8,
+  "limits": {
+    "requests": 20,
+    "calls": 5,
+    "units": 10,
+    "deadline_s": 60
+  },
+  "events": [
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "coalesced",
+      "tool": "search",
+      "elapsed_s": 0
+    },
+    {
+      "kind": "attempt",
+      "tool": "search",
+      "elapsed_s": 0,
+      "attempt": 1,
+      "units": 2
+    },
+    {
+      "kind": "success",
+      "tool": "search",
+      "elapsed_s": 0.016,
+      "attempt": 1
+    },
+    {
+      "kind": "cache_hit",
+      "tool": "search",
+      "elapsed_s": 0.016
+    },
+    {
+      "kind": "attempt",
+      "tool": "write",
+      "elapsed_s": 0.016,
+      "attempt": 1,
+      "units": 3
+    },
+    {
+      "kind": "success",
+      "tool": "write",
+      "elapsed_s": 0.016,
+      "attempt": 1
+    },
+    {
+      "kind": "attempt",
+      "tool": "write",
+      "elapsed_s": 0.016,
+      "attempt": 1,
+      "units": 3
+    },
+    {
+      "kind": "success",
+      "tool": "write",
+      "elapsed_s": 0.016,
+      "attempt": 1
+    },
+    {
+      "kind": "blocked",
+      "tool": "write",
+      "elapsed_s": 0.016,
+      "reason": "calls_or_units"
+    }
+  ],
+  "fixture": "Synthetic async tools; no model or external API called.",
+  "physical_calls": {
+    "search": 1,
+    "write": 2
+  },
+  "equivalent_results": true,
+  "unoptimized_search_calls_for_same_requests": 9
+}

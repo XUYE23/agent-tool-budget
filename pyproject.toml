@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-tool-budget"
+version = "0.1.0"
+description = "Per-run async tool budgets, safe retries, and read-only request coalescing."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "XUYE23"}]
+dependencies = []
+classifiers = ["Development Status :: 3 - Alpha", "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License"]
+
+[project.urls]
+Repository = "https://github.com/XUYE23/agent-tool-budget"
+Issues = "https://github.com/XUYE23/agent-tool-budget/issues"
+
+[project.scripts]
+agent-tool-budget = "agent_tool_budget.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

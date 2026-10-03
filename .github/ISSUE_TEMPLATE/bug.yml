@@ -1,0 +1,9 @@
+name: Bug report
+description: Report a reproducible failure
+body:
+  - type: textarea
+    attributes:
+      label: Reproduction
+      description: Include input, command, expected result, actual result, and Python version.
+    validations:
+      required: true
