@@ -96,7 +96,7 @@ MIT licensed. Initial implementation developed with AI assistance.
 
 ## Recorded local validation
 
-14 tests passed after installation on Windows / Python 3.12.14.
+15 tests passed after installation on Windows / Python 3.12.14.
 [Validation record](docs/validation.json) · [Demo result](docs/demo-result.json)
 
 The synthetic demo records 12 requests, 3 physical attempts, and 8 reserved units. Nine repeated reads produce one physical read; two allowed writes execute; the next write is blocked by the unit budget.

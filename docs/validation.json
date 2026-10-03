@@ -1,11 +1,12 @@
 {
   "python": "3.12.14",
   "os": "Windows",
-  "tests_run": 14,
+  "tests_run": 15,
   "failures": 0,
   "errors": 0,
   "installed_package": true,
   "demo": "passed",
   "date": "2026-10-03",
-  "optional_model_integrations": "not executed"
+  "optional_model_integrations": "not executed",
+  "package_version": "0.1.1"
 }

@@ -178,13 +178,19 @@ class Session:
             remaining = self._remaining()
             if remaining <= 0:
                 raise DeadlineExceeded("run deadline exceeded")
+            execution = asyncio.create_task(self._execute(tool,arguments))
             try:
-                result = await asyncio.wait_for(self._execute(tool,arguments),timeout=remaining)
-            except asyncio.TimeoutError:
-                if self._remaining() <= 0:
+                # Classify timeout by the wait outcome. On coarse timer platforms
+                # a timer may fire while monotonic() still reports time remaining.
+                done, _ = await asyncio.wait({execution}, timeout=remaining)
+                if execution not in done:
                     self._event("blocked",tool.name,reason="deadline")
-                    raise DeadlineExceeded("run deadline exceeded") from None
-                raise
+                    raise DeadlineExceeded("run deadline exceeded")
+                result = await execution  # Preserve a tool's own TimeoutError.
+            finally:
+                if not execution.done():
+                    execution.cancel()
+                    await asyncio.gather(execution,return_exceptions=True)
             if tool.read_only and self.cache_size and self.cache_ttl_s:
                 self.cache[key] = (time.monotonic()+self.cache_ttl_s,copy.deepcopy(result))
                 while len(self.cache) > self.cache_size:

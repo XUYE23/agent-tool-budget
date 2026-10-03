@@ -1,5 +1,6 @@
 import asyncio
 import unittest
+from unittest.mock import patch
 from agent_tool_budget import Budget, BudgetExceeded, DeadlineExceeded, Session, Tool, TransientToolError
 
 
@@ -112,6 +113,19 @@ class SessionTest(unittest.IsolatedAsyncioTestCase):
             with self.assertRaises(DeadlineExceeded):
                 await s.call("f")
             self.assertEqual(s.calls,1)
+
+    async def test_early_deadline_timer_is_classified_by_wait_outcome(self):
+        async def f():
+            await asyncio.Event().wait()
+        async def early_timeout(tasks, timeout):
+            await asyncio.sleep(0)
+            return set(), set(tasks)
+        async with Session([Tool("f",f)],budget=Budget(deadline_s=60)) as s:
+            with patch("agent_tool_budget.core.asyncio.wait",side_effect=early_timeout):
+                with self.assertRaises(DeadlineExceeded):
+                    await s.call("f")
+            self.assertGreater(s._remaining(),0)
+            self.assertEqual(len(s.tasks),0)
 
     async def test_failure_not_cached(self):
         n = 0
